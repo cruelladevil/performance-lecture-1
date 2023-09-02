@@ -18,22 +18,11 @@ function getParametersForUnsplash({width, height, quality, format}) {
  * */
 function removeSpecialCharacter(str) {
   const removeCharacters = ['#', '_', '*', '~', '&', ';', '!', '[', ']', '`', '>', '\n', '=', '-']
-  let _str = str
-  let i = 0,
-    j = 0
+  const removeCharactersRegExp = new RegExp(`[${removeCharacters.join('')}]`, 'g');
 
-  for (i = 0; i < removeCharacters.length; i++) {
-    j = 0
-    while (j < _str.length) {
-      if (_str[j] === removeCharacters[i]) {
-        _str = _str.substring(0, j).concat(_str.substring(j + 1))
-        continue
-      }
-      j++
-    }
-  }
-
-  return _str
+  return str
+    .slice(0, 300)
+    .replace(removeCharactersRegExp, '');
 }
 
 function Article(props) {
